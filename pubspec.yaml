@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   http: ^1.0.0
   carousel_slider: ^5.0.0
+  sqflite: ^2.3.0
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,8 @@ flutter_launcher_icons:
 flutter_native_splash:
   color: "#FFFFFF" # Background color of the splash screen (hex code)
   image: assets/images/couch_up_logo.jpg # Path to your splash image
+  android: true # Optional: true if you have an android splash screen
+  ios: true # Optional: true if you have an iOS splash screen
 
   android_12:
     image: assets/images/couch_up_logo.jpg # Optional: image for Android 12+

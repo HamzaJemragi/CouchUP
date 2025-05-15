@@ -1,3 +1,4 @@
+import 'package:couchup/model/db_helper.dart';
 import 'package:flutter/material.dart';
 import '../model/movie.dart';
 
@@ -11,6 +12,22 @@ class MovieDetailsPage extends StatefulWidget {
 }
 
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
+  bool _toggleProgressed = false;
+  final _databaseHelper = DatabaseHelper();
+
+  Future<void> toggleProgressed() async {
+  if (_toggleProgressed) {
+    // Remove movie from bookmarks
+    await _databaseHelper.deleteBookmarkMovie(widget.movie.id);
+  } else {
+    // Add movie to bookmarks
+    await DatabaseHelper.addBookmarkedMovie(widget.movie);
+  }
+  setState(() {
+    _toggleProgressed = !_toggleProgressed;
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     // Get the screen height for responsive image sizing
@@ -189,7 +206,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                   child: Container(),
                 ), // This will take up the remaining space
                 FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: _toggleProgressed ? null: toggleProgressed, // Call the function when pressed
                   child: const Icon(Icons.bookmark, color: Colors.white),
                   backgroundColor: Colors.black,
                 ),
